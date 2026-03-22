@@ -57,4 +57,4 @@ function displayResult() {
   `;
 }
 
-document.getElementById("show-result-btn").addEventListener("click", displayResult);
+document.getElementById("show-result-btn").addEventListener("click", displayResult);// final commit
