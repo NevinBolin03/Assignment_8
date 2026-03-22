@@ -1,7 +1,5 @@
 console.log("script.js connected!");
 
-console.log("script.js connected!");
-
 const selectedAnswers = {};
 
 const questionBlocks = document.querySelectorAll(".question-block");
@@ -17,44 +15,36 @@ questionBlocks.forEach((block) => {
       });
 
       button.classList.add("selected");
-
       selectedAnswers[questionId] = button.dataset.answer;
-      console.log(selectedAnswers);
+
+      console.log("Saved answers:", selectedAnswers);
     });
   });
 });
 
 function displayResult() {
-  const results = {
+  const totals = {
     steak: 0,
     pizza: 0,
     tacos: 0
   };
 
-  for (let question in selectedAnswers) {
+  for (const question in selectedAnswers) {
     const answer = selectedAnswers[question];
-    results[answer]++;
+    totals[answer]++;
   }
 
-  let finalResult = "";
-  let finalMessage = "";
+  let resultText = "";
 
-  if (results.steak >= results.pizza && results.steak >= results.tacos) {
-    finalResult = "Steak";
-    finalMessage = "You are Steak 🥩 — bold, classic, and dependable.";
-  } else if (results.pizza >= results.steak && results.pizza >= results.tacos) {
-    finalResult = "Pizza";
-    finalMessage = "You are Pizza 🍕 — relaxed, fun, and everybody likes you.";
+  if (totals.steak >= totals.pizza && totals.steak >= totals.tacos) {
+    resultText = "You are STEAK 🥩";
+  } else if (totals.pizza >= totals.steak && totals.pizza >= totals.tacos) {
+    resultText = "You are PIZZA 🍕";
   } else {
-    finalResult = "Tacos";
-    finalMessage = "You are Tacos 🌮 — energetic, exciting, and full of flavor.";
+    resultText = "You are TACOS 🌮";
   }
 
-  const resultContainer = document.getElementById("result-container");
-  resultContainer.innerHTML = `
-    <h2>Your Result: ${finalResult}</h2>
-    <p>${finalMessage}</p>
-  `;
+  document.getElementById("result").textContent = resultText;
 }
 
-document.getElementById("show-result-btn").addEventListener("click", displayResult);// final commit
+document.getElementById("result-btn").addEventListener("click", displayResult);
